@@ -1,6 +1,4 @@
 #include <iostream>
-#include <stdio.h>
-#include <math.h>
 #include <queue>
 #include <stack>
 #define PI 3.14
@@ -167,7 +165,6 @@ graph::~graph()
     delete []adj;
     cout<<"\nDestructor"<<endl;
 }
-
 
 int main()
 {
