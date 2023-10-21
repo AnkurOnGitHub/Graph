@@ -17,7 +17,7 @@ class graph
         void createGraph(int,int);
         void printMatrix();
         void printGraph();
-        void adjcentNode(int);
+        void IsAdjcentNode(int);
         bool isIsolate(int);
         ~graph();
         
@@ -43,7 +43,7 @@ void graph::createGraph(int vertex, int edge)
         adj[b][a]=1;
     }
 }
-void graph::adjcentNode(int n)
+void graph::IsAdjcentNode(int n)
 {
     cout<<"Adjcent Nodes : ";
     for (int i = 0; i < vCount; i++)
