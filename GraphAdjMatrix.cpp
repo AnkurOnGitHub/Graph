@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <queue>
+#include <stack>
 #define PI 3.14
 using namespace std;
 
@@ -20,6 +21,7 @@ class graph
         void IsAdjcentNode(int);
         bool isIsolate(int);
         void BFS(int);
+        void DFS(int);
         ~graph();
         
 };
@@ -101,29 +103,62 @@ void graph::BFS(int start)
     for (int i = 0; i < vCount; i++)
         ptr[i]=0;
 
-    queue<int*>q;
-    q.emplace(adj[start]);
+    queue<int>q;
+    q.emplace(start);
     ptr[start]=1;
-    cout<<start<<"  ";
-    int*p;
+    cout<<"BFS-> ";
+    int p;
     while (!q.empty())
     {
         p=q.front();
+        cout<<"V"<<p<<"  ";
         q.pop();
         for (int i = 0; i < vCount; i++)
         {
-            if(p[i]==1)
+            if(adj[p][i]==1)
             {
                 if(ptr[i]==0)
                 {
-                    q.emplace(adj[i]);
+                    q.emplace(i);
                     ptr[i]=1;
-                    cout<<(i)<<"  ";
-
                 }
             }
         }
     }
+}
+void graph::DFS(int start)
+{
+    int *ptr=new int[vCount];
+    for(int i=0; i < vCount; i++)
+        ptr[i]=0;
+
+    stack<int>s;
+    s.emplace(start);
+    ptr[start]=1;
+    cout<<"DFS-> ";
+    int t;
+    while (!s.empty())
+    {
+        t=s.top();
+        cout<<"V"<<t<<"  ";
+        s.pop();
+        for (int i = 0; i < vCount; i++)
+        {
+            if(adj[t][i]==1)
+            {
+                if(ptr[i]==0)
+                {
+                    s.emplace(i);
+                    ptr[i]=1;
+                    // temp=i; 
+                    //0 2 2 1 1 3 3 2
+                }
+            }
+        }
+        
+    }
+    
+    
 }
 graph::~graph()
 {
@@ -134,13 +169,10 @@ graph::~graph()
 }
 
 
-
-
-
 int main()
 {
     graph G;
-    G.createGraph(4,4);
+    G.createGraph(6,9);
     G.printMatrix();
     cout<<endl;
     G.printGraph();
