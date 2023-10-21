@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <math.h>
-#include <string.h>
+#include <queue>
 #define PI 3.14
 using namespace std;
 
@@ -19,6 +19,7 @@ class graph
         void printGraph();
         void IsAdjcentNode(int);
         bool isIsolate(int);
+        void BFS(int);
         ~graph();
         
 };
@@ -94,6 +95,36 @@ bool graph::isIsolate(int node)
     return true;
     
 }
+void graph::BFS(int start)
+{
+    int *ptr=new int[vCount];
+    for (int i = 0; i < vCount; i++)
+        ptr[i]=0;
+
+    queue<int*>q;
+    q.emplace(adj[start]);
+    ptr[start]=1;
+    cout<<start<<"  ";
+    int*p;
+    while (!q.empty())
+    {
+        p=q.front();
+        q.pop();
+        for (int i = 0; i < vCount; i++)
+        {
+            if(p[i]==1)
+            {
+                if(ptr[i]==0)
+                {
+                    q.emplace(adj[i]);
+                    ptr[i]=1;
+                    cout<<(i)<<"  ";
+
+                }
+            }
+        }
+    }
+}
 graph::~graph()
 {
     for (int i = 0; i < vCount; i++)
@@ -113,5 +144,7 @@ int main()
     G.printMatrix();
     cout<<endl;
     G.printGraph();
+    cout<<endl;
+    G.BFS(0);
     return 0;
 }//GraphAdjMatrix.cpp
