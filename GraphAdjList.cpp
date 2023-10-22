@@ -9,6 +9,8 @@
 using namespace std;
 
 // Graph implemented by Adjacency list
+
+//Node body
 struct node
 {
 public:
@@ -16,6 +18,7 @@ public:
     node *next;
 };
 
+//singly linked list
 class adjList
 {
     private:
@@ -139,6 +142,7 @@ adjList::~adjList()
         deleteFirstNode();
 }
 
+//graph class
 class graph  // Graph implemented Using self made list
 {
 private:
@@ -217,7 +221,15 @@ graph::~graph()
     delete []arr;
 }
 
-// when adjecent list use of STL
+
+
+
+
+
+
+// graph implemented using STL list
+
+
 class Node
 {
 public:
@@ -238,6 +250,7 @@ public:
         vertex = v;
     }
 };
+
 class graph2
 {
 private:
@@ -253,7 +266,6 @@ public:
     ~graph2();
     
 };
-
 graph2::graph2()
 {
     vcount = 0;
@@ -264,9 +276,9 @@ graph2::graph2(int n)
     vcount = n;
     arr = NULL;
 }
-void graph2::createGraph2(int v)
+void graph2::createGraph2(int vCount)
 {
-    vcount = v;
+    vcount = vCount;
     int e, ver;
     arr = new forward_list<Node*>[vcount];
     for (int i = 0; i < vcount; i++)
@@ -278,6 +290,7 @@ void graph2::createGraph2(int v)
         {
             cout << "Enter the vertex number : ";
             cin >> ver;
+            // addAdjacentNode(i,ver);
             Node *n = new Node(ver);
             arr[i].emplace_front(n);
         }
@@ -296,7 +309,7 @@ void graph2::printGraph2()
         cout << "V" << j << "->";
         for (i = arr[j].begin(); i != arr[j].end(); i++)
         {
-            cout << "V" << (*(i))->vertex << "  "; // 1 2 2 2 3 3 3 1 0 2 2 1
+            cout << "V" << (*(i))->vertex << "  ";
         }
         cout << endl;
     }
@@ -319,169 +332,10 @@ graph2::~graph2()
 int main()
 {
     graph2 A;
-    A.createGraph2(4); // createGraph(No of vertex, direction)
+    A.createGraph2(); // createGraph(No of vertex, direction)
     A.printGraph2();
     // A.DFSGraph(0);
     // A.printGraph();
     // A.BFSGraph(0);              //BFSGraph(starting vertex of search)
     return 0;
-}
-
-// MySirG code
-/*
-#include<iostream>
-#include<stdio.h>
-// #include "DynArray.cpp"
-using namespace std;
-struct node
-{
-    int item;
-    int vertex;
-    node *next;
-};
-class AdjList
-{
-    private:
-        node *start;
-        int vertex;
-    public:
-        AdjList();
-        AdjList(int);
-        node* getStart();
-        void setVertex(int);
-        void addNode(int,int );
-        void removeFirstNode();
-        void printList();
-        ~AdjList();
-};
-node* AdjList::getStart()
-{
-    return start;
-}
-void AdjList::printList()
-{
-    node *t;
-    t=start;
-    while(t)
-    {
-        cout<<t->vertex<<","<<t->item<<" ";
-        t=t->next;
-    }cout<<endl;
-}
-AdjList::~AdjList()
-{
-    while(start)
-        removeFirstNode();
-}
-void AdjList::removeFirstNode()
-{
-    node *r;
-    if(start)
-    {
-        r=start;
-        start=start->next;
-        delete r;
-    }
-}
-void AdjList::setVertex(int v)
-{
-    vertex=v;
-}
-void AdjList::addNode(int v,int data)
-{
-    node *n=new node;
-    n->item=data;
-    n->vertex=v;
-    n->next=start;
-    start=n;
-}
-AdjList::AdjList()
-{
-    start=NULL;
-}
-AdjList::AdjList(int v)
-{
-    start=NULL;
-    vertex=v;
-}
-class Graph
-{
-    private:
-        int v_count;
-        AdjList *arr;
-    public:
-        Graph();
-        int getVCount();
-        // DynArray& adjacentNodes(int);
-        void createGraph(int);
-        void printGraph();
-        ~Graph();
-
-};
-// DynArray& Graph::adjacentNodes(int n)
-// {
-//     DynArray *p=new DynArray(1);
-//     node *t=this->arr[n].getStart();
-//     while(t)
-//     {
-//         p->append(t->vertex);
-//         t=t->next;
-//     }
-//     return *p;
-// }
-int Graph::getVCount()
-{
-    return v_count;
-}
-void Graph::printGraph()
-{
-    for(int i=0;i<v_count;i++)
-    {
-        cout<<"V"<<i<<"->";
-        arr[i].printList();
-    }
-}
-Graph::~Graph()
-{
-    delete []arr;
-}
-void Graph::createGraph(int vno)
-{
-    int n,v,data;
-    v_count=vno;
-    arr=new AdjList[v_count];
-    for(int i=0;i<v_count;i++)
-    {
-        // arr[i].setVertex(i);
-        cout<<"\nHow many adjacent nodes of V"<<i<<":";
-        cin>>n;
-        for(int j=0;j<n;j++)
-        {
-            cout<<"\nEnter vertex number: ";
-            cin>>v;
-            cout<<"\nEnter data to store: ";
-            cin>>data;
-            // data=10;
-            arr[i].addNode(v,data);
-        }
-
-    }
-
-}
-Graph::Graph()
-{
-    v_count=0;
-    arr=NULL;
-}
-int main()
-{
-    Graph G;
-    G.createGraph(3);
-    G.printGraph();
-    cout<<endl;
-    return 0;
-
-}
-
-
-*/
+}//GraphAdjList.cpp
