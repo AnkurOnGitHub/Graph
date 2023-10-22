@@ -13,7 +13,7 @@ class graph
         int eCount;
         int **adj;
     public:
-        void createGraph(int,int);
+        void createGraph(int,int,int);
         void printMatrix();
         void printGraph();
         void IsAdjcentNode(int);
@@ -23,7 +23,7 @@ class graph
         ~graph();
         
 };
-void graph::createGraph(int vertex, int edge)
+void graph::createGraph(int vertex, int edge, int direction)
 {
     int a,b;
     vCount=vertex;
@@ -41,7 +41,10 @@ void graph::createGraph(int vertex, int edge)
         cout<<"Enter the edges : ";
         cin>>a>>b;
         adj[a][b]=1;
-        adj[b][a]=1;
+        //direction = 0 -> undirected
+        //direction 0 1 -> directed
+        if(direction == 0)
+            adj[b][a]=1;
     }
 }
 void graph::IsAdjcentNode(int n)
@@ -169,11 +172,11 @@ graph::~graph()
 int main()
 {
     graph G;
-    G.createGraph(6,9);
+    G.createGraph(4,4,0);
     G.printMatrix();
     cout<<endl;
     G.printGraph();
     cout<<endl;
-    G.BFS(0);
+    G.DFS(0);
     return 0;
 }//GraphAdjMatrix.cpp
